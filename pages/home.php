@@ -17,7 +17,7 @@ $user = $_SESSION['user'];
     <div class="navbar">
         <div class="brand">Php Project</div>
         <div class="profile" id="profileLink">
-            <img src="https://picsum.photos/200/300" alt="Avatar">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTalKI-jQdKcIi3SQhUA6RRLNZrHhuG680iBw&s" alt="Avatar">
 
             <span><?= $user['name']?></span>
 
