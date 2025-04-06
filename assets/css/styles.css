@@ -1,0 +1,107 @@
+@import url(globals.css);
+
+body {
+    background: #f3f4f6;
+    color: #333;
+}
+
+.navbar {
+    width: 100%;
+    background: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s;
+}
+
+.dropdown a:hover {
+    background: var(--primary-color);
+    color: var(--text-color);
+}
+
+.show {
+    display: block;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.container p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.error {
+    color: rgb(223, 8, 8);
+    text-align: center;
+}
+
+.error-messages,
+.success-messages {
+    padding: 0.2em 0.5em;
+    text-align: center;
+    border-radius:12px;
+    margin-bottom:1em;
+}
+.error-messages{
+background:rgb(235, 79, 79);
+}
+.success-messages{
+    background:rgb(89, 213, 89);
+}
+.error-messages .error, .success-messages .success{
+    color:whitesmoke;
+}
