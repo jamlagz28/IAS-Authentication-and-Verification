@@ -10,80 +10,93 @@ $csrfToken = Helper::generateCsrfToken();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Create Account</title>
     <link rel="stylesheet" href="assets/css/auth_styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         body {
-            background-image: url('https://t4.ftcdn.net/jpg/04/60/71/01/360_F_460710131_YkD6NsivdyYsHupNvO3Y8MPEwxTAhORh.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-        }
-
-        .container {
+            background: url('https://images.unsplash.com/photo-1586281380349-632531db7edb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
 
-        .left {
-            width: 40%;
-            padding: 20px;
-            color: white;
-        }
-
-        .right {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
+        .auth-wrapper {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 12px;
             width: 100%;
             max-width: 400px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .input-group {
+        .auth-wrapper h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .form-control {
             margin-bottom: 15px;
+            position: relative;
         }
 
-        .input-group input {
+        .form-control input {
             width: 100%;
-            padding: 10px;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 15px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
-        .btn {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
+        .form-control i {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            color: #888;
             cursor: pointer;
         }
 
-        .btn:hover {
-            background-color: #0056b3;
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .register {
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+
+        .switch-page {
+            margin-top: 18px;
             text-align: center;
-            margin-top: 20px;
+            font-size: 14px;
         }
 
-        .register a {
-            color: #007BFF;
+        .switch-page a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .switch-page a:hover {
+            text-decoration: underline;
         }
 
         .error-messages {
-            color: red;
+            color: #e74c3c;
+            font-size: 14px;
             margin-bottom: 10px;
         }
     </style>
@@ -91,49 +104,55 @@ $csrfToken = Helper::generateCsrfToken();
 </head>
 
 <body>
-   
-        <div class="right">
-            <center><h2>Create an Account</h2> </center>
-            <?php if (isset($_SESSION['errors'])): ?>
-                <div class="error-messages">
-                    <?php Helper::showError("general") ?>
-                </div>
-            <?php endif; ?>
-            <form action="sign-up" method="POST">
-                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
 
-                <div class="input-group">
-                    <input type="text" name="full_name" <?= Helper::oldValue("full_name", "Your Name") ?> required>
-                    <?php Helper::showError("full_name") ?>
-                </div>
-                <div class="input-group">
-                    <input type="email" name="email" <?= Helper::oldValue("email", "Enter Your Email") ?> required>
-                    <?php Helper::showError("email") ?>
-                </div>
-                <div class="input-group">
-                    <input type="password" name="password" <?= Helper::oldValue("password", "Set a Password") ?> required>
-                    <i class="fa fa-eye"></i>
-                    <?php Helper::showError("password") ?>
-                </div>
-                <div class="input-group">
-                    <input type="password" name="confirm_password" <?= Helper::oldValue("confirm_password", "Re-enter Password") ?> required>
-                    <i class="fa fa-eye"></i>
-                    <?php Helper::showError("confirm_password") ?>
-                </div>
-                <button type="submit" class="btn">Register</button>
-            </form>
-            <div class="register">
-            Have an account already? <a href="sign-in">Login</a>
+    <div class="auth-wrapper">
+        <h2>Register New Account</h2>
+
+        <?php if (isset($_SESSION['errors'])): ?>
+            <div class="error-messages">
+                <?php Helper::showError("general") ?>
             </div>
+        <?php endif; ?>
+
+        <form action="sign-up" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+
+            <div class="form-control">
+                <input type="text" name="full_name" <?= Helper::oldValue("full_name", "Enter your full name") ?> required>
+                <?php Helper::showError("full_name") ?>
+            </div>
+
+            <div class="form-control">
+                <input type="email" name="email" <?= Helper::oldValue("email", "Your email address") ?> required>
+                <?php Helper::showError("email") ?>
+            </div>
+
+            <div class="form-control">
+                <input type="password" name="password" <?= Helper::oldValue("password", "Choose a password") ?> required>
+                <i class="fa fa-eye"></i>
+                <?php Helper::showError("password") ?>
+            </div>
+
+            <div class="form-control">
+                <input type="password" name="confirm_password" <?= Helper::oldValue("confirm_password", "Confirm your password") ?> required>
+                <i class="fa fa-eye"></i>
+                <?php Helper::showError("confirm_password") ?>
+            </div>
+
+            <button type="submit" class="btn-submit">Sign Up</button>
+        </form>
+
+        <div class="switch-page">
+            Already have an account? <a href="sign-in">Log in</a>
         </div>
     </div>
+
     <script src="assets/javascript/main.js"></script>
 </body>
 
 </html>
 
 <?php
-// Clear session errors after displaying
 unset($_SESSION['errors']);
 unset($_SESSION['old']);
 ?>
